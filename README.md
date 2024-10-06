@@ -1,0 +1,167 @@
+# How to install Docker
+
+You can install either the docker engine or the docker desktop on your machine. This document will guide you on how to install the docker engine.
+
+You can install the docker engine in two ways:
+
+1. By following the docker documentation
+2. By following below step by step guide
+
+### By following Docker Documentation
+
+You can install docker from here [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/). If you're using other platforms instead of Ubuntu you'll get guides here [Supported platforms](https://docs.docker.com/engine/install/).
+
+### By following Step by Step Guide
+
+- Run the following command to uninstall all conflicting packages:
+
+```bash
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+```
+
+- Set up Docker's Apt repository:
+
+```bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+- Install the Docker packages:
+
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+- To check if the docker engine installed:
+
+```bash
+docker -v
+```
+
+- To check if the docker-compose engine installed as a plugin with docker:
+
+```bash
+docker compose version
+```
+
+## Docker Engine Post Installation Steps to fix Permission Issue
+
+- Create the docker group:
+
+```bash
+sudo groupadd docker
+```
+
+- Add your user to the docker group:
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+- Log out and log back in so that your group membership is re-evaluated:
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+- You can also run this:
+
+```bash
+newgrp docker
+```
+
+- Change the group permission
+
+```bash
+sudo chown -R "$USER":"$USER" $HOME/.docker
+sudo chmod -R g+rwx "$HOME/.docker"
+```
+
+## How to remove Docker Containers, Images, Volumes and Networks
+
+- To delete all the Containers, Images and Volumes:
+
+```bash
+docker system prune --volumes -af
+```
+
+- To delete all the Networks:
+
+```bash
+docker network prune -f
+```
+
+- To delete all containers including its volumes:
+
+```bash
+docker rm -vf $(docker ps -aq)
+```
+
+- To delete all the images:
+
+```bash
+docker rmi -f $(docker images -aq)
+```
+
+- To delete specific Container:
+
+```bash
+docker rm container_id1, container_id2...
+```
+
+- To delete specific Images:
+
+```bash
+docker rmi image_id1, image_id2...
+```
+
+- To delete specific Networks:
+
+```bash
+docker network rm network_id1, network_id2...
+```
+
+- To delete specific Volumes:
+
+```bash
+docker volume rm volume_id1, volume_id2...
+```
+
+## How to create Docker Containers, Images, Volumes and Networks
+
+- To create a Docker container:
+
+```bash
+docker run --name my-container my-image
+```
+
+- To create a Docker image from a Dockerfile:
+
+```bash
+docker build -t my-image .
+```
+
+- To create a Docker volume:
+
+```bash
+docker volume create my-volume
+```
+
+- To create a Docker network:
+
+```bash
+docker network create my-network
+```
+
+Remember to replace `my-container`, `my-image`, `my-volume`, and `my-network` with your own names or identifiers for your specific use case. For Informatik Lab we use a common network name called `ilab`.

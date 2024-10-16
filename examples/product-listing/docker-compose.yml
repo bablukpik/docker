@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  web-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php8-apache-container
+    depends_on:
+      - db-service
+      - product-service
+    volumes:
+      - ./product-listing:/var/www/html
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=db-service
+      - DB_USER=admin
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+      - DB_NAME=test_db
+    secrets:
+      - db_password
+
+  product-service:
+    build:
+      context: ./products
+      dockerfile: Dockerfile.products
+    container_name: product-container
+    volumes:
+      - ./products:/app
+    ports:
+      - "8081:80"
+
+  db-service:
+    image: mysql:8.0
+    container_name: mysql-container
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+    volumes:
+      - db_data:/var/lib/mysql
+    secrets:
+      - db_root_password
+      - db_password
+
+volumes:
+  db_data:
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  db_root_password:
+    file: ./secrets/db_root_password.txt

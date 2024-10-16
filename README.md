@@ -1,6 +1,6 @@
 # What is Docker?
 
-Docker is an open-source platform for developing, shipping, and running applications in containers. The containers are lightweight and portable machines within your machine. Containers allow developers to package applications with all the necessary dependencies (libraries, configuration files, etc.) into a single, self-sufficient unit. This ensures the application runs consistently across different environments, such as development, testing, and production. Here's a brief overview:
+Docker is an open-source platform for developing, shipping, and running applications in containers. Containers are lightweight, portable, and isolated units that run applications independently from the host system. Containers allow developers to package applications with all the necessary dependencies (libraries, configuration files, etc.) into a single, self-sufficient unit. This ensures the application runs consistently across different environments, such as development, testing, and production. Here's a brief overview:
 
 1. **Containerization**: Docker packages applications and their dependencies into lightweight, portable containers.
 2. **Consistency**: Containers ensure that applications run consistently across different environments. Since containers package everything needed to run the application, you avoid the "works on my machine" problem.
@@ -10,26 +10,26 @@ Docker is an open-source platform for developing, shipping, and running applicat
 6. **Portability**: Containers can run on any system that supports Docker (e.g., local machines, cloud platforms).
 7. **DevOps**: Docker facilitates DevOps practices by streamlining development, testing, and deployment processes. It is widely adopted in DevOps workflows, particularly in microservices architectures and continuous integration/continuous deployment (CI/CD) pipelines.
 
-## Key Components of Docker:
+## Key Components of Docker
 
 1. **Docker Engine**: The runtime that allows you to build, run, and manage containers.
 2. **Docker Images**: These are read-only templates used to create containers. An image includes everything the application needs, such as code, runtime, libraries, and settings.
 3. **Docker Containers**: These are instances of Docker images. They are lightweight, fast to start, and run isolated from each other and the underlying system.
 4. **Dockerfile**: A script that defines how to build a Docker image. It specifies the base image, dependencies, commands to run, and other configurations.
-5. **Docker Hub**: A cloud-based repository where Docker users can share and download images.
+5. **Docker Hub**: Docker Hub is a registry that simplifies the process of sharing, collaborating on, and reusing containerized applications.
 
 ## How to install Docker
 
-You can install either the docker engine or the docker desktop on your machine. This document will guide you on how to install the docker engine.
+You can install either the Docker Engine or the Docker Desktop on your machine. This document will guide you on how to install the Docker Engine.
 
-You can install the docker engine in two ways:
+You can install the Docker Engine in two ways:
 
-1. By following the docker documentation
+1. By following the Docker documentation
 2. By following below step by step guide
 
 ### By following Docker Documentation
 
-You can install docker from here [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/). If you're using other platforms instead of Ubuntu you'll get guides here [Supported platforms](https://docs.docker.com/engine/install/).
+You can install Docker from here [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/). If you're using other platforms instead of Ubuntu you'll get guides here [Supported platforms](https://docs.docker.com/engine/install/).
 
 ### By following Step by Step Guide
 
@@ -63,33 +63,27 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-- To check if the docker engine installed:
+- To check if the Docker Engine installed:
 
 ```bash
 docker -v
 ```
 
-- To check if the docker-compose engine installed as a plugin with docker:
+- To check if the Docker Compose Engine installed as a plugin with Docker:
 
 ```bash
 docker compose version
 ```
 
-### Docker Engine Post Installation Steps to fix Permission Issue
+### Docker Engine Post-Installation Steps to Fix Permission Issues
 
-- Create the docker group:
+- Create the Docker group:
 
 ```bash
 sudo groupadd docker
 ```
 
-- Add your user to the docker group:
-
-```bash
-sudo usermod -aG docker $USER
-```
-
-- Log out and log back in so that your group membership is re-evaluated:
+- Add your user to the Docker group:
 
 ```bash
 sudo usermod -aG docker $USER
@@ -108,9 +102,9 @@ sudo chown -R "$USER":"$USER" $HOME/.docker
 sudo chmod -R g+rwx "$HOME/.docker"
 ```
 
-## Some Basic Docker Commands
+## Some Common Docker Commands
 
-Here is some basic docker commands
+Here are some common Docker commands
 
 ### How to remove Docker Containers, Images, Volumes and Networks
 
@@ -126,7 +120,7 @@ docker system prune --volumes -af
 docker network prune -f
 ```
 
-- To delete all containers including its volumes:
+- To delete all containers including their volumes:
 
 ```bash
 docker rm -vf $(docker ps -aq)
@@ -164,16 +158,17 @@ docker volume rm volume_id1, volume_id2...
 
 ### How to create Docker Containers, Images, Volumes and Networks
 
-- To create a Docker container:
-
-```bash
-docker run --name my-container my-image
-```
 
 - To create a Docker image from a Dockerfile:
 
 ```bash
 docker build -t my-image .
+```
+
+- To create a Docker container from a Docker Image:
+
+```bash
+docker run --name my-container my-image
 ```
 
 - To create a Docker volume:

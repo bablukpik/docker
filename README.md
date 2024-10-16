@@ -20,12 +20,12 @@ Docker is an open-source platform for developing, shipping, and running applicat
 
 ## How to install Docker
 
-You can install either the [Docker Engine](https://docs.docker.com/engine/install) or the [Docker Desktop](https://www.docker.com/products/docker-desktop) on your machine. This document will guide you on how to install the Docker Engine.
+You can install either the [Docker Engine](https://docs.docker.com/engine/install) or the [Docker Desktop](https://www.docker.com/products/docker-desktop) on your machine. This section will guide you on how to install the Docker Engine.
 
 You can install the Docker Engine in two ways:
 
-1. By following the Docker documentation
-2. By following below step by step guide
+1. [By following the Docker documentation](https://github.com/bablukpik/docker?tab=readme-ov-file#by-following-docker-documentation)
+2. [By following below step by step guide](https://github.com/bablukpik/docker?tab=readme-ov-file#by-following-step-by-step-guide)
 
 ### By following Docker Documentation
 
@@ -104,71 +104,171 @@ sudo chmod -R g+rwx "$HOME/.docker"
 
 ## Some Common Docker Commands
 
-Here are some common Docker commands
+Here are some common Docker commands for viewing, creating and removing Docker resources.
 
-### How to remove Docker Containers, Images, Volumes and Networks
+### How to view Docker Resources
 
-- To delete all the Containers, Images and Volumes:
+Here are common Docker commands for viewing various Docker resources:
 
-```bash
-docker system prune --volumes -af
-```
+#### Docker Images
 
-- To delete all the Networks:
+- To list all images:
 
 ```bash
-docker network prune -f
+docker images
 ```
 
-- To delete all containers including their volumes:
+- To list all images (including intermediate images):
 
 ```bash
-docker rm -vf $(docker ps -aq)
+docker images -a
 ```
 
-- To delete all the images:
+- To list images with specific format (e.g., only ID and Repository):
 
 ```bash
-docker rmi -f $(docker images -aq)
+docker images --format "{{.ID}}: {{.Repository}}"
 ```
 
-- To delete specific Container:
+#### Docker Containers
+
+- To list running containers:
 
 ```bash
-docker rm container_id1, container_id2...
+docker ps
 ```
 
-- To delete specific Images:
+- To list all containers (including stopped ones):
 
 ```bash
-docker rmi image_id1, image_id2...
+docker ps -a
 ```
 
-- To delete specific Networks:
+- To show the latest created container (includes all states):
 
 ```bash
-docker network rm network_id1, network_id2...
+docker ps -l
 ```
 
-- To delete specific Volumes:
+- To show n last created containers (includes all states):
 
 ```bash
-docker volume rm volume_id1, volume_id2...
+docker ps -n=2  # Shows last 2 containers
 ```
 
-### How to create Docker Containers, Images, Volumes and Networks
+#### Docker Volumes
 
-- To create a Docker image from a Dockerfile:
+- To list volumes:
 
 ```bash
-docker build -t my-image .
+docker volume ls
 ```
 
-- To create a Docker container from a Docker Image:
+- To inspect a specific volume:
 
 ```bash
-docker run --name my-container my-image
+docker volume inspect my-volume
 ```
+
+#### Docker Networks
+
+- To list networks:
+
+```bash
+docker network ls
+```
+
+- To inspect a specific network:
+
+```bash
+docker network inspect my-network
+```
+
+#### Docker System
+
+- To display Docker disk usage:
+
+```bash
+docker system df
+```
+
+- To show detailed information on space usage:
+
+```bash
+docker system df -v
+```
+
+#### Inspecting Resources
+
+- To view detailed information about a container:
+
+```bash
+docker inspect my-container
+```
+
+- To view detailed information about an image:
+
+```bash
+docker inspect my-image:tag
+```
+
+#### Viewing Logs
+
+- To view the logs of a container:
+
+```bash
+docker logs my-container
+```
+
+- To follow log output in real-time:
+
+```bash
+docker logs -f my-container
+```
+
+**Note**: Replace `my-container`, `my-image`, `my-volume`, and `my-network` with the actual names or IDs of your Docker resources.
+
+**Additional Tip**: Many of these commands support various flags for filtering and formatting output. Use `docker [command] --help` to see all available options for each command.
+
+### How to create Docker Resources
+
+Here are some common Docker commands for creating Docker resources:
+
+#### Docker Images
+
+- To create a Docker image from a Dockerfile in the current directory:
+
+```bash
+docker build -t my-image:tag .
+```
+
+- To create an image from a specific Dockerfile:
+
+```bash
+docker build -t my-image:tag -f /path/to/Dockerfile .
+```
+
+#### Docker Containers
+
+- To create and start a Docker container from an image:
+
+```bash
+docker run --name my-container my-image:tag
+```
+
+- To create a container in detached mode with port mapping:
+
+```bash
+docker run -d --name my-container -p 8080:80 my-image:tag
+```
+
+- To create a container with a mounted volume:
+
+```bash
+docker run -v /host/path:/container/path --name my-container my-image:tag
+```
+
+#### Docker Volumes
 
 - To create a Docker volume:
 
@@ -176,10 +276,127 @@ docker run --name my-container my-image
 docker volume create my-volume
 ```
 
+- To create a volume with specific driver:
+
+```bash
+docker volume create --driver local --name my-volume
+```
+
+#### Docker Networks
+
 - To create a Docker network:
 
 ```bash
 docker network create my-network
 ```
 
-Remember to replace `my-container`, `my-image`, `my-volume`, and `my-network` with your own names or identifiers for your specific use case.
+- To create a network with specific subnet and gateway:
+
+```bash
+docker network create --subnet 172.18.0.0/16 --gateway 172.18.0.1 my-network
+```
+
+**Note**: Remember to replace `my-container`, `my-image`, `my-volume`, and `my-network` with your own names or identifiers for your specific use case. The `tag` in image names is optional but recommended for version control.
+
+**Additional Tips**:
+
+- Use `docker run --help` to see all available options for running containers.
+- For production environments, consider using Docker Compose or Kubernetes for managing multi-container applications.
+
+### How to remove Docker Resources
+
+Here are some common Docker commands for removing Docker resources:
+
+#### Docker Images
+
+- To remove specific Images:
+
+```bash
+docker rmi image_id1 image_id2 ...
+```
+
+- To remove all images:
+
+```bash
+docker rmi -f $(docker images -aq)
+```
+
+#### Docker Containers
+
+- To remove specific Containers:
+
+```bash
+docker rm container_id1 container_id2 ...
+```
+
+- To remove all containers:
+
+```bash
+docker rm -f $(docker ps -aq)
+```
+
+- To remove stopped containers:
+
+```bash
+docker rm $(docker ps -aqf status=exited)
+```
+
+- To stop all running containers:
+
+```bash
+docker stop $(docker ps -aq)
+```
+
+- To remove all containers including their volumes:
+
+```bash
+docker rm -vf $(docker ps -aq)
+```
+
+- To remove all the Containers, Images and Volumes:
+
+```bash
+docker system prune --volumes -af
+```
+
+- To remove all the Containers, Images, Volumes and Networks:
+
+```bash
+docker system prune --volumes -af && docker network prune -f
+```
+
+#### Docker Volumes
+
+- To remove specific Volumes:
+
+```bash
+docker volume rm volume_name1 volume_name2 ...
+```
+
+- To remove all volumes:
+
+```bash
+docker volume rm $(docker volume ls -q)
+```
+
+#### Docker Networks
+
+- To remove specific Networks:
+
+```bash
+docker network rm network_id1 network_id2 ...
+```
+
+- To remove all custom Networks:
+
+```bash
+docker network rm $(docker network ls -q)
+```
+
+Or
+
+```bash
+docker network prune -f
+```
+
+**Note**: Use these commands with caution, especially those that remove all resources. Ensure you have backups of important data before running cleanup commands.

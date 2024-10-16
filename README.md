@@ -1,4 +1,24 @@
-# How to install Docker
+# What is Docker?
+
+Docker is an open-source platform for developing, shipping, and running applications in containers. The containers are lightweight and portable machines within your machine. Containers allow developers to package applications with all the necessary dependencies (libraries, configuration files, etc.) into a single, self-sufficient unit. This ensures the application runs consistently across different environments, such as development, testing, and production. Here's a brief overview:
+
+1. **Containerization**: Docker packages applications and their dependencies into lightweight, portable containers.
+2. **Consistency**: Containers ensure that applications run consistently across different environments. Since containers package everything needed to run the application, you avoid the "works on my machine" problem.
+3. **Isolation**: Each container runs in isolation, improving security and reducing conflicts.
+4. **Efficiency**: Containers share the host OS kernel, making them more resource-efficient than virtual machines.
+5. **Scalability**: Docker makes it easy to scale applications by running multiple instances of containers.
+6. **Portability**: Containers can run on any system that supports Docker (e.g., local machines, cloud platforms).
+7. **DevOps**: Docker facilitates DevOps practices by streamlining development, testing, and deployment processes. It is widely adopted in DevOps workflows, particularly in microservices architectures and continuous integration/continuous deployment (CI/CD) pipelines.
+
+## Key Components of Docker:
+
+1. **Docker Engine**: The runtime that allows you to build, run, and manage containers.
+2. **Docker Images**: These are read-only templates used to create containers. An image includes everything the application needs, such as code, runtime, libraries, and settings.
+3. **Docker Containers**: These are instances of Docker images. They are lightweight, fast to start, and run isolated from each other and the underlying system.
+4. **Dockerfile**: A script that defines how to build a Docker image. It specifies the base image, dependencies, commands to run, and other configurations.
+5. **Docker Hub**: A cloud-based repository where Docker users can share and download images.
+
+## How to install Docker
 
 You can install either the docker engine or the docker desktop on your machine. This document will guide you on how to install the docker engine.
 
@@ -55,7 +75,7 @@ docker -v
 docker compose version
 ```
 
-## Docker Engine Post Installation Steps to fix Permission Issue
+### Docker Engine Post Installation Steps to fix Permission Issue
 
 - Create the docker group:
 
@@ -88,7 +108,11 @@ sudo chown -R "$USER":"$USER" $HOME/.docker
 sudo chmod -R g+rwx "$HOME/.docker"
 ```
 
-## How to remove Docker Containers, Images, Volumes and Networks
+## Some Basic Docker Commands
+
+Here is some basic docker commands
+
+### How to remove Docker Containers, Images, Volumes and Networks
 
 - To delete all the Containers, Images and Volumes:
 
@@ -138,7 +162,7 @@ docker network rm network_id1, network_id2...
 docker volume rm volume_id1, volume_id2...
 ```
 
-## How to create Docker Containers, Images, Volumes and Networks
+### How to create Docker Containers, Images, Volumes and Networks
 
 - To create a Docker container:
 
@@ -164,4 +188,4 @@ docker volume create my-volume
 docker network create my-network
 ```
 
-Remember to replace `my-container`, `my-image`, `my-volume`, and `my-network` with your own names or identifiers for your specific use case. For Informatik Lab we use a common network name called `ilab`.
+Remember to replace `my-container`, `my-image`, `my-volume`, and `my-network` with your own names or identifiers for your specific use case.

@@ -20,7 +20,7 @@ Docker is an open-source platform for developing, shipping, and running applicat
 
 ## How to install Docker
 
-You can install either the Docker Engine or the Docker Desktop on your machine. This document will guide you on how to install the Docker Engine.
+You can install either the [Docker Engine](https://docs.docker.com/engine/install) or the [Docker Desktop](https://www.docker.com/products/docker-desktop) on your machine. This document will guide you on how to install the Docker Engine.
 
 You can install the Docker Engine in two ways:
 
@@ -89,7 +89,7 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
 
-- You can also run this:
+- Log out and log back in to apply the changes or run the below command:
 
 ```bash
 newgrp docker
@@ -157,7 +157,6 @@ docker volume rm volume_id1, volume_id2...
 ```
 
 ### How to create Docker Containers, Images, Volumes and Networks
-
 
 - To create a Docker image from a Dockerfile:
 

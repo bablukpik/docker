@@ -400,3 +400,37 @@ docker network prune -f
 ```
 
 **Note**: Use these commands with caution, especially those that remove all resources. Ensure you have backups of important data before running cleanup commands.
+
+## Docker Compose
+
+Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. Then, with a single command, you create and start all the services from your configuration.
+
+### Basic Structure of a Docker Compose File
+
+A Docker Compose file is a YAML file that defines the services, networks, and volumes for your application. Here's a basic example:
+
+```yaml
+version: "3.8"
+services:
+  web-service:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+```
+
+### Building and Running with Docker Compose
+
+To build and run your application using Docker Compose, you would typically use the following command:
+
+## Contributing
+
+Feel free to submit issues, create pull requests, or fork the repository to help improve the project.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).

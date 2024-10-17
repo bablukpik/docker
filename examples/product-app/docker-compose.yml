@@ -20,6 +20,8 @@ services:
       - DB_NAME=test_db
     secrets:
       - db_password
+    networks:
+      - app-network
 
   product-service:
     build:
@@ -28,12 +30,15 @@ services:
     container_name: product-container
     volumes:
       - ./products:/app
+      - /app/node_modules
     ports:
       - "8081:80"
+    networks:
+      - app-network
 
   db-service:
     image: mysql:8.0
-    container_name: mysql-container
+    container_name: db-container
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
@@ -46,6 +51,8 @@ services:
     secrets:
       - db_root_password
       - db_password
+    networks:
+      - app-network
 
 volumes:
   db_data:
@@ -55,3 +62,7 @@ secrets:
     file: ./secrets/db_password.txt
   db_root_password:
     file: ./secrets/db_root_password.txt
+
+networks:
+  app-network:
+    driver: bridge

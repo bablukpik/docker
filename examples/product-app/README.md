@@ -15,7 +15,7 @@ This project demonstrates a simple multi-container application using Docker Comp
 
 ## Getting Started
 
-1. Clone only the product-listing-multi-container directory:
+1. Clone only the **product-app** directory:
 
    ```
    git clone --depth 1 --filter=blob:none --sparse https://github.com/bablukpik/docker.git

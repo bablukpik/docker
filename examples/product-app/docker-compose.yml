@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: php8-apache-container
+    container_name: web-container
     depends_on:
       - db-service
       - product-service

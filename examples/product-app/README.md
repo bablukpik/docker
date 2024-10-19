@@ -53,6 +53,12 @@ To stop and remove the containers, networks, and volumes, first press `Ctrl+C` t
 docker compose down
 ```
 
+What it does is stops and removes the containers and networks. If you also want to remove the volumes, you can add the `--volumes` flag:
+
+```
+docker compose down --volumes
+```
+
 ## Troubleshooting
 
 If you encounter any issues, try the following steps:

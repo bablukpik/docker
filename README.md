@@ -427,6 +427,10 @@ networks:
 
 To build and run your application using Docker Compose, you would typically use the following command:
 
+```bash
+docker compose up
+```
+
 ## Contributing
 
 Feel free to submit issues, create pull requests, or fork the repository to help improve the project.

@@ -102,6 +102,35 @@ sudo chown -R "$USER":"$USER" $HOME/.docker
 sudo chmod -R g+rwx "$HOME/.docker"
 ```
 
+## Docker Setup
+
+To run an application using Docker, follow these steps:
+
+1. Build the Docker image:
+
+   ```
+   docker build -t your-app-name:tag .
+   ```
+
+2. Run the container:
+
+   ```
+   docker run -d -p 3000:3000 --name your-app-name:tag --network network-name your-app-name:tag
+   ```
+
+   This command runs the container in detached mode, maps port 3000 to the host, gives it a name, and connects it to the `network-name` network.
+
+3. To stop the container:
+
+   ```
+   docker stop your-app-name:tag
+   ```
+
+4. To remove the container:
+   ```
+   docker rm your-app-name:tag
+   ```
+
 ## Some Common Docker Commands
 
 Here are some common Docker commands for viewing, creating and removing Docker resources.

@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "up:dev": "docker compose up",
+    "down": "docker compose down && docker image prune -f && docker builder prune -f"
   },
   "author": "Bablu Ahmed",
   "license": "ISC",

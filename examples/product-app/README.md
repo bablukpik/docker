@@ -17,7 +17,7 @@ This project demonstrates a simple multi-container application using Docker Comp
 
 1. Clone only the **product-app** directory:
 
-   ```
+   ```bash
    git clone --depth 1 --filter=blob:none --sparse https://github.com/bablukpik/docker.git
    cd docker
    git sparse-checkout set examples/product-app
@@ -31,8 +31,14 @@ This project demonstrates a simple multi-container application using Docker Comp
 
 3. Build and start the containers:
 
-   ```
+   ```bash
    docker compose up
+   ```
+
+   Or
+
+   ```bash
+   npm run up:dev
    ```
 
 4. Access the applications:
@@ -53,10 +59,51 @@ To stop and remove the containers, networks, and volumes, first press `Ctrl+C` t
 docker compose down
 ```
 
+Or
+
+```bash
+npm run down
+```
+
 What it does is stops and removes the containers and networks. If you also want to remove the volumes, you can add the `--volumes` flag:
 
 ```
 docker compose down --volumes
+```
+
+## How to install NPM Packages
+
+If you need to install any npm packages then first install the packages using `npm install <package-name>` then rebuild the images and start the containers using one of the following commands:
+
+```bash
+npm run up:dev -- --build
+```
+
+Or
+
+```bash
+docker compose up --build
+```
+
+- This command will rebuild the Docker images and start the containers.
+- The server should now be listening on `http://localhost:5000` (or the port you specified in the `.env` file).
+
+Or you can install any npm packages in the container using the following command:
+
+```bash
+docker exec product-container npm install <package-name>
+```
+
+This way you can run any commands inside the container without having to enter the container. In case of any issues you can always enter the container using the following command:
+
+```bash
+docker exec -it product-container bash
+```
+
+or
+
+```bash
+docker exec -it product-container /bin/bash
 ```
 
 ## Troubleshooting

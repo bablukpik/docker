@@ -18,9 +18,8 @@ This project demonstrates a simple multi-container application using Docker Comp
 1. Clone only the **product-app** directory:
 
    ```bash
-   git clone --depth 1 --filter=blob:none --sparse https://github.com/bablukpik/docker.git
+   git clone git@github.com:bablukpik/docker.git docker
    cd docker
-   git sparse-checkout set examples/product-app
    cd examples/product-app
    ```
 
